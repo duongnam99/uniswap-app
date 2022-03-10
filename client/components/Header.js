@@ -14,7 +14,7 @@ const style = {
     navItem: `px-4 py-2 m-1 flex items-center text-lg font-semibold text-[0.9rem] cursor-pointer rounded-3xl`,
     activeNavItem: `bg-[#CA6F1E]`,
     buttonsContainer: `flex w-1/4 justify-end items-center`,
-    button: `flex items-center bg-[#229954] rounded-2xl mx-2 text-[0.9rem] font-semibold cursor-pointer`,
+    button: `flex items-center bg-[#636e72] rounded-2xl mx-2 text-[0.9rem] font-semibold cursor-pointer`,
     buttonPadding: `p-2`,
     buttonTextContainer: `h-8 flex items-center`,
     buttonIconContainer: `flex items-center justify-center w-8 h-8`,
