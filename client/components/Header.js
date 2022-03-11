@@ -27,7 +27,7 @@ const Header = () => {
     const {connectWallet, currentAccount} = useContext(TransactionContext)
 
     console.log({connectWallet, currentAccount})
-    
+
     return (
         <div className={style.wrapper}>
         <div className={style.headerLogo}>
@@ -70,14 +70,18 @@ const Header = () => {
                     <AiOutlineDown />
                 </div>
             </div>
-            <div className={`${style.button} ${style.buttonPadding}`}>
-                <div className={style.buttonTextContainer}>Harry</div>
-            </div>
-            <div onClick={() => connectWallet()} className={`${style.button} ${style.buttonPadding}`}>
-              <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
-                Connect Wallet
-              </div>
-            </div>
+            { currentAccount ? (
+                 <div className={`${style.button} ${style.buttonPadding}`}>
+                 <div className={style.buttonTextContainer}>0x...55</div>
+               </div>
+            ) : (
+                  <div onClick={() => connectWallet()} className={`${style.button} ${style.buttonPadding}`}>
+                  <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
+                    Connect Wallet
+                  </div>
+                </div>
+            )}
+        
             <div className={`${style.button} ${style.buttonPadding}`}>
                 <div className={`${style.buttonIconContainer} mx-2`}>
                     <HiOutlineDotsVertical />
