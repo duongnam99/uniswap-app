@@ -22,10 +22,11 @@ const style = {
     buttonAccent: `bg-[#172A42] border border-[#163256] hover:border-[#234169] h-full rounded-2xl flex items-center justify-center text-[#4F90EA]`,
 }
 
+
 const Header = () => {
     const [selectedNav, setSelectedNav] = useState('swap')
     const {connectWallet, currentAccount} = useContext(TransactionContext)
-
+    
     console.log({connectWallet, currentAccount})
 
     return (
