@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import {contractABI, contractAddress} from '../lib/constants'
+import { ethers} from 'ethers'
 
 export const TransactionContext  = React.createContext()
 
@@ -6,6 +8,18 @@ let eth
 
 if (typeof window !== 'undefined') { // prevent window undefined error
     eth = window.ethereum
+}
+
+const getEthereumContract = () => {
+    const provider = new ethers.providers.Web3Provider(eth)
+    const signer = provider.getSigner()
+    const transactionContract = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      signer,
+    )
+  
+    return transactionContract
 }
 
 export const TransactionProvider = ({children}) => {
@@ -53,16 +67,16 @@ export const TransactionProvider = ({children}) => {
         try {
             if (!metamask) return alert("Please install metamaks")
             const {addressTo, amount} = formData
-            const transactionContract = getEthereumcontract()
+            const transactionContract = getEthereumContract()
             const parsedAmount = ethers.utils.parseEther(amount)
 
-            await metamask.requrest({
+            await metamask.request({
                 method: 'eth_sendTransaction',
                 params: [
                     {
                         from: connectedAccount,
                         to: addressTo,
-                        gas: 0x7E40, // 520000wei
+                        gas: '0x7EF40', // 520000wei
                         value: parsedAmount._hex
                     },
                 ],
@@ -94,6 +108,7 @@ export const TransactionProvider = ({children}) => {
     }
     const handleChange = (e, name) => {
         setFormData((prevState) => ({...prevState, [name]: e.target.value}))
+        console.log(formData)
     }
     return (
         <TransactionContext.Provider
@@ -101,6 +116,8 @@ export const TransactionProvider = ({children}) => {
                 currentAccount,
                 connectWallet,
                 sendTransaction,
+                handleChange,
+                formData
             }}
         >
             {children}
