@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import {contractABI, contractAddress} from '../lib/constants'
 import { ethers} from 'ethers'
 import { client } from '../lib/sanityClient'
+import { RiRouterFill } from 'react-icons/ri'
+import router, { useRouter } from 'next/router'
+import { route } from 'next/dist/server/router'
 
 export const TransactionContext  = React.createContext()
 
@@ -30,6 +33,7 @@ export const TransactionProvider = ({children}) => {
         addressTo: '',
         amount: '',
     })
+    const router = useRouter()
 
     useEffect(() => {
         checkIfWalletIsConnected()
@@ -124,7 +128,6 @@ export const TransactionProvider = ({children}) => {
     }
     const handleChange = (e, name) => {
         setFormData((prevState) => ({...prevState, [name]: e.target.value}))
-        console.log(formData)
     }
 
     const saveTransaction = async (
@@ -146,16 +149,27 @@ export const TransactionProvider = ({children}) => {
 
         await client
         .patch(currentAccount)
-        .setIfMissing({transactions: []})
-        .insert('after', 'transaction[-1]', [
-            {
+        .setIfMissing({ transactions: [] })
+        .insert('after', 'transactions[-1]', [
+          {
             _key: txHash,
             _ref: txHash,
-            _type: 'reference'
-            }
+            _type: 'reference',
+          },
         ])
         .commit()
+        
+        return
     }
+
+    useEffect(() => {
+        if (isLoading) {
+            router.push(`/?loading=${currentAccount}`)
+        } else {
+            route.push('/')
+        }
+        
+    }, [isLoading])
     return (
         <TransactionContext.Provider
             value={{
@@ -163,7 +177,8 @@ export const TransactionProvider = ({children}) => {
                 connectWallet,
                 sendTransaction,
                 handleChange,
-                formData
+                formData,
+                isLoading
             }}
         >
             {children}
