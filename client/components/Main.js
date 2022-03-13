@@ -1,11 +1,11 @@
-import {useContext} from 'react'
 import Image from 'next/image'
-import { RiSettings3Fill } from 'react-icons/ri'
+import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
+import { RiSettings3Fill } from 'react-icons/ri'
+import Modal from 'react-modal'
 import ethLogo from '../assets/eth.png'
 import { TransactionContext } from '../context/TransactionContext'
-import Modal from 'react-modal'
-import { Router, useRouter } from 'next/router'
 import TransactionLoader from './TransactionLoader'
 
 Modal.setAppElement('#__next')

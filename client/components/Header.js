@@ -25,14 +25,14 @@ const style = {
 
 const Header = () => {
     const [selectedNav, setSelectedNav] = useState('swap')
+    const [userName, setUserName] = useState()
     const {connectWallet, currentAccount} = useContext(TransactionContext)
-    const {userName, setUserName} = useState('')
     
     console.log({connectWallet, currentAccount})
 
     useEffect(() => {
-      // if (!currentAccount) return
-      // setUserName(`${currentAccount.slice(0,7)}...${currentAccount.slice(35)}`)
+      if (!currentAccount) return
+      setUserName(`${currentAccount.slice(0,7)}...${currentAccount.slice(35)}`)
     }, [currentAccount])
 
     return (
@@ -48,7 +48,7 @@ const Header = () => {
             >
               Swap
             </div>
-            <div
+            {/* <div
               onClick={() => setSelectedNav('pool')}
               className={`${style.navItem} ${selectedNav === 'pool' && style.activeNavItem}`}
             >
@@ -59,7 +59,7 @@ const Header = () => {
               className={`${style.navItem} ${selectedNav === 'vote' && style.activeNavItem}`}
             >
               Vote
-            </div>
+            </div> */}
             <a href='https://info.uniswap.org/#/' target='_blank' rel='noreferrer'>
               <div className={style.navItem}>
                 Charts <FiArrowUpRight />

@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import {contractABI, contractAddress} from '../lib/constants'
-import { ethers} from 'ethers'
+import { ethers } from 'ethers'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { contractABI, contractAddress } from '../lib/constants'
 import { client } from '../lib/sanityClient'
-import { RiRouterFill } from 'react-icons/ri'
-import router, { useRouter } from 'next/router'
-import { route } from 'next/dist/server/router'
 
 export const TransactionContext  = React.createContext()
 
