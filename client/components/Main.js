@@ -32,7 +32,7 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: '#dcdde1',
+        backgroundColor: '#353b48',
         padding: 0,
         border: '7px',
     },
