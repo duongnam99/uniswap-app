@@ -166,9 +166,9 @@ export const TransactionProvider = ({children}) => {
         if (isLoading) {
             router.push(`/?loading=${currentAccount}`)
         } else {
-            route.push('/')
+            router.push('/')
         }
-        
+
     }, [isLoading])
     return (
         <TransactionContext.Provider
